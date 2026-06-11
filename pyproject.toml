@@ -1,0 +1,21 @@
+[project]
+name = "exploring-guardrails"
+version = "0.1.0"
+description = "Basic Guardrails AI feature tests using OpenRouter free models"
+requires-python = ">=3.10"
+dependencies = [
+  "guardrails-ai>=0.5.0",
+  "pydantic>=2.0",
+  "python-dotenv>=1.0.0",
+  "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = [
+  "live: calls OpenRouter and requires OPENROUTER_API_KEY",
+]
