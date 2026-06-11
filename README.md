@@ -33,7 +33,6 @@ python -m exploring-guardrails.demo
 
 ```bash
 export OPENROUTER_API_KEY="sk-or-..."
-pytest
+python -m pytest
 ```
 
-The live test is intentionally small so you can verify integration without spending paid credits. OpenRouter still requires an API key/account for authentication.

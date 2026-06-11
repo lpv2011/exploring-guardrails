@@ -2,14 +2,14 @@ import os
 
 import pytest
 
-from guardrails_openrouter_basic.guards import (
+from exploring_guardrails.guards import (
     input_guard,
     json_cleanup_guard,
     multi_output_guard,
     output_guard,
     structured_product_guard,
 )
-from guardrails_openrouter_basic.openrouter_client import OpenRouterConfig, chat
+from exploring_guardrails.openrouter_client import OpenRouterConfig, chat
 
 
 def test_input_guard_passes_safe_prompt():
