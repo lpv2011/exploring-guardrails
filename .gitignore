@@ -121,3 +121,5 @@ uv.lock
 # Local test outputs
 test_output/
 outputs/
+
+results.json

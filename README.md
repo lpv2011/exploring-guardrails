@@ -26,7 +26,7 @@ cp .env.example .env
 
 ```bash
 export OPENROUTER_API_KEY="sk-or-..."
-python -m exploring-guardrails.demo
+python -m exploring_guardrails.demo
 ```
 
 ## Run every test including the live OpenRouter smoke test
@@ -36,3 +36,68 @@ export OPENROUTER_API_KEY="sk-or-..."
 python -m pytest
 ```
 
+## Promptfoo latency testing
+
+Promptfoo is used to compare OpenRouter responses with and without guardrails.
+
+### Install Promptfoo
+
+```bash
+node --version
+npm install -g promptfoo
+promptfoo --version
+```
+
+### Run evaluation
+
+Run from the project root:
+
+```bash
+source .venv/bin/activate
+pip install -e ".[dev]"
+promptfoo eval --no-cache --output results.json
+```
+
+Open results UI:
+
+```bash
+promptfoo view
+```
+
+### Run repeated latency tests
+
+Use multiple runs because model/API latency fluctuates.
+
+```bash
+promptfoo eval --no-cache --output results-run-1.json
+promptfoo eval --no-cache --output results-run-2.json
+promptfoo eval --no-cache --output results-run-3.json
+```
+
+### Relevant test scenarios
+
+The committed `promptfoo/payloads.yaml` covers:
+
+```text
+Normal safe prompt
+PII/email blocking
+Competitor mention blocking
+JSON response validation
+Prompt injection attempt
+```
+
+
+### Calculate added latency
+
+```text
+added latency = guarded latency_ms - unguarded latency_ms
+```
+
+Compare the `latency_ms` metadata in the result files.
+
+### Common commands
+
+```bash
+promptfoo eval --no-cache --output results.json
+promptfoo view
+```
